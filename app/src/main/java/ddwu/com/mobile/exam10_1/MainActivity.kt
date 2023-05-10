@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
 class MainActivity : AppCompatActivity() {
+		lateinit var binding : ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+				binding = ActivitiyMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
 				val dao = SubjectDao()
 				val dataList = dao.dataList
@@ -15,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 				layoutManager.oriebtation = LinearLayoutManager.VERTICAL
 				binding.recyclerView.LayoutManager = layoutManager
 
-				val adapter = MyAdapter(this, R.layout.list_view, dataList)
+ 				val adapter = MyAdapter(this, R.layout.list_view, dataList)
 				binding.recyclerView.adapter = adapter
     }
 }
