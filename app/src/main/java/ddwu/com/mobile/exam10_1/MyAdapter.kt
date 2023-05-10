@@ -8,7 +8,7 @@ class MyAdapter(val context: Context, val layout: Int, val list: ArrayList<Strin
 		// 각 항목의 뷰를 보관하는 Holder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyAdapter.MyViewHolder {
         val view = LayoutInflater.from(context).inflate(layout, parent, false)
-				return MyViewHolder(view)
+				return MyViewHolder(this, view, list)
     }
 		// Holder에 보관중인 뷰에 원본 데이터 연결
     override fun onBindViewHolder(holder: MyAdapter.MyViewHolder, position: Int) {
@@ -19,7 +19,14 @@ class MyAdapter(val context: Context, val layout: Int, val list: ArrayList<Strin
         return list.size
     }
 		// 항목의 뷰를 생성한 후 멤버변수로 보관하는 ViewHolder
-		class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+		class MyViewHolder(adapter: MyAdapter, view: View, dataList: ArrayList<Sting>) : RecyclerView.ViewHolder(view) {
 			val tvText : TextView = view.findViewById(R.id.tvText)
+			init{
+				view.setOnClickListener {
+					Toast.makeText(view.context, "${dataList[adapterPosition]}", Toast.LENGTH_SHORT).show()
+					dataList.removeAt(adapterPosition)
+					adapter.notifyDataSetChanged()
+				}
+			}
 		}
 }
