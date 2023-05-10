@@ -19,5 +19,10 @@ class MainActivity : AppCompatActivity() {
 
  				val adapter = MyAdapter(this, R.layout.list_view, dataList)
 				binding.recyclerView.adapter = adapter
+
+				binding.btnAdd.SetOnClickListener{
+					dataList.add(binding.etText.text.toString())
+					adapter.notifyDataSetChanged()
+				}
     }
 }
